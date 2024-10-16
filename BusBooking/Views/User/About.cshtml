@@ -1,0 +1,24 @@
+﻿@model BusBooking.Models.User
+
+<div class="container py-5" style="background-color: #f8f9fa;">
+    <div class="card border-0 shadow-lg p-4" style="background-color: #ffffff;">
+        <h2 class="text-center mb-4" style="color: #17a2b8;">Welcome to Wee Travels</h2>
+        <p class="text-center" style="color: #6c757d;">
+            Your trusted partner in seamless bus travel. We’re dedicated to making your journey comfortable,
+            convenient, and affordable. With a comprehensive network of bus operators and real-time booking capabilities,
+            we ensure that you find the best routes, schedules, and prices to suit your needs.
+        </p>
+        <p class="text-center" style="color: #6c757d;">
+            Our mission is to simplify travel planning with a user-friendly platform that offers reliable information
+            and exceptional service. Whether you're traveling for business or pleasure, our goal is to provide you
+            with a smooth and enjoyable experience from start to finish.
+        </p>
+        <p class="text-center mb-4" style="color: #6c757d;">
+            Join us and discover a new way to travel efficiently, economically, and effortlessly connected.
+            Your next adventure starts here!
+        </p>
+        <div class="text-center mt-4">
+            @Html.ActionLink("Book Now", "Home", "User", new { area = "" }, new { @class = "btn btn-lg text-white", style = "background-color: #17a2b8; border-radius: 0.5rem; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: background-color 0.3s;" })
+        </div>
+    </div>
+</div>

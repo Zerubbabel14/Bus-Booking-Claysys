@@ -1,0 +1,37 @@
+﻿@model IEnumerable<BusBooking.Models.Schedule>
+
+@{
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<div class="text-center mb-4">
+    <h4 class="h4 fw-bold text-dark">Schedule details</h4>
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-info text-center">
+            @ViewBag.Message
+        </div>
+    }
+</div>
+<div class="table-responsive">
+    <table class="table table-bordered table-hover table-striped bg-white">
+        <thead class="thead-dark">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.travelDate)</th>
+                <th>@Html.DisplayNameFor(model => model.fare)</th>
+                <th>@Html.DisplayNameFor(model => model.arrivalTime)</th>
+                <th>@Html.DisplayNameFor(model => model.departureTime)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.travelDate)</td>
+                    <td>@Html.DisplayFor(modelItem => item.fare)</td>
+                    <td>@Html.DisplayFor(modelItem => item.arrivalTime)</td>
+                    <td>@Html.DisplayFor(modelItem => item.departureTime)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

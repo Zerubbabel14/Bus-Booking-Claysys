@@ -1,0 +1,283 @@
+﻿@model BusBooking.Models.User
+
+@{
+    Layout = "~/Views/Shared/LoginAndSignupLayout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow p-4 mt-5" style="border: 1px solid #e0e0e0;">
+                    <h4 class="text-center mb-4">User Registration</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="container-mx8 mx-auto" style="width: 90%">
+                        <!-- First Name -->
+                        <div class="form-group row mb-3">
+                            @Html.LabelFor(model => model.Firstname, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                            <div class="col-sm-9">
+                                @Html.EditorFor(model => model.Firstname, new { htmlAttributes = new { @class = "form-control", @id = "firstName" } })
+                                <span id="firstName-span"></span>
+                            </div>
+                        </div>
+
+                        <!-- Last Name -->
+                        <div class="form-group row mb-3">
+                            @Html.LabelFor(model => model.Lastname, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                            <div class="col-sm-9">
+                                @Html.EditorFor(model => model.Lastname, new { htmlAttributes = new { @class = "form-control", @id = "lastName" } })
+                                <span id="lastName-span"></span>
+                            </div>
+                        </div>
+
+                        <!-- Date of Birth -->
+                        <div class="form-group row mb-3">
+                            @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(m => m.DateOfBirth, new { @type = "date", @id = "dateOfBirth", @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <!-- Age -->
+                        <div class="form-group row mb-3">
+                            @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                            <div class="col-sm-9">
+                                @Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control", @id = "userAge", @readonly = "readonly" } })
+                            </div>
+                        </div>
+
+                        <!-- Gender -->
+                        <div class="form-group row mb-3">
+                            @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                            <div class="col-sm-9">
+                                <div class="form-check form-check-inline">
+                                    @Html.RadioButtonFor(model => model.Gender, "Male", new { @class = "form-check-input", @id = "male" })
+                                    <label class="form-check-label" for="male">Male</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    @Html.RadioButtonFor(model => model.Gender, "Female", new { @class = "form-check-input", @id = "female" })
+                                    <label class="form-check-label" for="female">Female</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    @Html.RadioButtonFor(model => model.Gender, "Other", new { @class = "form-check-input", @id = "other" })
+                                    <label class="form-check-label" for="other">Other</label>
+                                </div>
+                                @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="form-group row mb-3">
+                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                            <div class="col-sm-9">
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @id = "userEmail" } })
+                                <span id="email-span" style="display: block"></span>
+                            </div>
+                        </div>
+
+
+
+                        <!-- Mobile Number -->
+                        <div class="form-group row mb-3">
+                            @Html.LabelFor(model => model.Mobilenumber, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                            <div class="col-sm-9">
+                                @Html.EditorFor(model => model.Mobilenumber, new { htmlAttributes = new { @class = "form-control", @id = "userPhone", @maxlength = "10" } })
+                                <span id="phone-span"></span>
+                            </div>
+                        </div>
+
+                        <!-- Address -->
+                        <div class="form-group row mb-3">
+                            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                            <div class="col-sm-9">
+                                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <!-- State -->
+                        <div class="form-group row mb-3">
+                            @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                            <div class="col-sm-9">
+                                <select name="State" id="State" class="form-control">
+                                    <option>Select state</option>
+                                    <option>Tamil Nadu</option>
+                                    <option>Kerala</option>
+                                    <option>Karnataka</option>
+                                    <option>Andhra Pradesh</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- City -->
+                        <div class="form-group row mb-3">
+                            @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                            <div class="col-sm-9">
+                                <select name="City" id="City" class="form-control"></select>
+                            </div>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="form-group row mb-3">
+                            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                            <div class="col-sm-9">
+                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @id = "userPassword", type = "password" } })
+                                <div class="form-text text-muted">
+                                    <span id="password-span" style="display: block"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-3">
+                            <label class="col-sm-3 col-form-label">Confirm password</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" id="confirm-password" type="password" />
+                                <div class="form-text text-muted">
+                                    <span id="confirm-password-span" style="display: block"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="form-group row mb-3">
+                            <div class="col-sm-9 offset-sm-3">
+                                <input type="submit" value="Sign up" class="btn btn-dark text-white w-100 shadow-sm" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#State").change(function () {
+                let s = $("#State").val();
+                if (s == "Tamil Nadu") {
+                    $("#City").html("<option>Select city</option><option>Coimbatore</option><option>Tiruppur</option><option>Madurai</option><option>Chennai</option>");
+                }
+                else if (s == "Kerala") {
+                    $("#City").html("<option>Select city</option><option>Palakkad</option><option>Guruvayur</option><option>Chittur</option>");
+                }
+                else if (s == "Andhra Pradesh") {
+                    $("#City").html("<option>Select city</option><option>Hyderabad</option><option>Guntur</option>");
+                }
+                else if (s == "Karnataka") {
+                    $("#City").html("<option>Select city</option><option>Bangalore</option><option>Mysuru</option>");
+                }
+            });
+            $("#firstName").keyup(function () {
+                let fname = $("#firstName").val();
+                if (fname.search(/[a-zA-Z]+$/) === -1) {
+                    $("#firstName-span").html("First name should contain only alphabets");
+                    $("#firstName-span").css("color", "red");
+                } else {
+                    $("#firstName-span").html("");
+                }
+            });
+            $("#lastName").keyup(function () {
+                let lname = $("#lastName").val();
+                if (lname.search(/[a-zA-Z]+$/) === -1) {
+                    $("#lastName-span").html("Last name should contain only alphabets");
+                    $("#lastName-span").css("color", "red");
+                } else {
+                    $("#lastName-span").html("");
+                }
+            });
+            $("#userPhone").change(function () {
+                let lname = $("#userPhone").val();
+                if (lname.search(/^[0-9]+$/) === -1) {
+                    $("#phone-span").html("Phone number should contain only numbers.");
+                    $("#phone-span").css("color", "red");
+                    document.getElementById("phone").value = "";
+                } else {
+                    $("#phone-span").html("");
+                }
+            });
+            $("#userEmail").change(function () {
+                let lname = $("#userEmail").val();
+                if (lname.search(/^[a-zA-Z0-9._%+-]+@@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/) === -1) {
+                    $("#email-span").html("Invalid email.");
+                    document.getElementById("email-span").style.color = "red";
+                } else {
+                    $("#email-span").html("");
+                }
+            });
+            // Date of birth selection
+            // Set max attribute to today's date in YYYY-MM-DD format
+            function setMaxDate() {
+                const today = new Date();
+                const year = today.getFullYear();
+                const month = String(today.getMonth() + 1).padStart(2, '0');
+                const day = String(today.getDate()).padStart(2, '0');
+                const maxDate = `${year}-${month}-${day}`;
+                $("#dateOfBirth").attr("max", maxDate);
+            }
+            setMaxDate();
+            $("#dateOfBirth").change(function () {
+                const todayDate = new Date();
+                const dateOfBirth = new Date($(this).val());
+                const ageField = $("#userAge");
+                let age = todayDate.getFullYear() - dateOfBirth.getFullYear();
+                const monthDifference = todayDate.getMonth() - dateOfBirth.getMonth();
+
+                if (monthDifference < 0 || (monthDifference === 0 && todayDate.getDate() < dateOfBirth.getDate())) {
+                    age--; // Adjusting age
+                }
+
+                ageField.val(age);
+            });
+            $("#userPassword").keyup(function () {
+                let pass = document.getElementById("userPassword");
+                if (pass.value.length < 10 || /[a-z]/.test(pass.value) == false || /[A-Z]/.test(pass.value) == false || /[0-9]/.test(pass.value) == false || /[`@@!#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(pass.value) == false) {
+                    $("#password-span").html("Invalid password.");
+                    document.getElementById("password-span").style.color = "red";
+                }
+                else {
+                    $("#password-span").html("");
+                }
+            });
+            $("#confirm-password").keyup(function () {
+                let password = $("#userPassword").val();
+                let confirmPassword = $("#confirm-password").val();
+
+                if (password !== confirmPassword) {
+                    $("#confirm-password-span").html("Password mismatch");
+                    $("#confirm-password-span").css("color", "red");
+                } else {
+                    $("#confirm-password-span").html("");
+                }
+            });
+
+        });
+
+
+        @if (ViewBag.SignupSuccess != null)
+        {
+            <text>
+            Swal.fire({
+                title: 'Signup Successful!',
+                text: 'You have registered successfully.',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '@Url.Action("Login", "User")';
+                }
+            });
+            </text>
+        }
+    </script>
+}

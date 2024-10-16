@@ -1,0 +1,112 @@
+﻿@model BusBooking.Models.User
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <script>
+        alert('@TempData["ErrorMessage"]');
+    </script>
+}
+
+
+@{
+    Layout = "~/Views/Shared/LoginAndSignupLayout.cshtml";
+}
+
+
+@using (Html.BeginForm("Login", "User", new { returnUrl = TempData["returnUrl"] }, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-lg p-5 mt-5 bg-light rounded" style="border: 2px solid #17a2b8;">
+                    <h4 class="text-center mb-4 text-dark fw-bold">Login</h4>
+                    <hr class="mb-4" />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="mx-auto" style="width: 100%;">
+                        <div class="form-group row mb-4">
+                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "col-sm-3 col-form-label text-secondary" })
+                            <div class="col-sm-9">
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control border-info", @id = "userEmail", @placeholder = "Enter your email" } })
+                                <span id="email-span" class="form-text text-muted"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-4">
+                            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "col-sm-3 col-form-label text-secondary" })
+                            <div class="col-sm-9">
+                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control border-info", @id = "userPassword", type = "password", @placeholder = "Enter your password" } })
+                                <div class="form-text text-muted">
+                                    <span class="password-span" id="password-span"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-4">
+                            <div class="col-sm-6 offset-sm-3">
+                                <input type="submit" value="Login" class="btn btn-dark text-white w-100 shadow-sm" />
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-center my-4">
+                            <a href="@Url.Action("Signup", "User")" class="text-info" style="text-decoration: none;">New User? Sign Up</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("form").submit(function (event) {
+                let email = $("#userEmail").val();
+                let password = $("#userPassword").val();
+                let valid = true;
+
+                if (!email) {
+                    alert("Email Should not be empty. Please enter your email.");
+                    valid = false;
+                }
+
+                if (!password) {
+                    alert("Password Should not be empty. Please enter your password.");
+                    valid = false;
+                }
+
+                // To prevent form submission
+                if (!valid) {
+                    event.preventDefault();
+                }
+            });
+
+            $("#userEmail").change(function () {
+                let email = $("#userEmail").val();
+                if (!/^[a-zA-Z0-9._%+-]+@@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+                    $("#email-span").html("Invalid email.");
+                    document.getElementById("email-span").style.color = "red";
+                } else {
+                    $("#email-span").html("");
+                    document.getElementById("email-span").style.color = "green";
+                }
+            });
+            $("#userPassword").keyup(function () {
+                let pass = document.getElementById("userPassword");
+                if (pass.value.length < 10 || /[a-z]/.test(pass.value) == false || /[A-Z]/.test(pass.value) == false || /[0-9]/.test(pass.value) == false || /[`@@!#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(pass.value) == false) {
+                    $("#password-span").html("Invalid password.");
+                    document.getElementById("password-span").style.color = "red";
+                }
+                else {
+                    $("#password-span").html("");
+                    document.getElementById("password-span").style.color = "green";
+                }
+            });
+        });
+
+    </script>
+}

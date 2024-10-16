@@ -1,0 +1,127 @@
+﻿@model BusBooking.Models.SeatSelection
+
+@{
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="form-horizontal bg-white rounded shadow p-4">
+                    <h4 class="text-center text-primary">Fill this to confirm booking</h4>
+                    <hr />
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="mx-auto">
+                        <div class="form-group row my-3">
+                            @Html.LabelFor(model => model.aadharNo, htmlAttributes: new { @class = "col-md-4 col-form-label text-md-right" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.aadharNo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.aadharNo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row my-3">
+                            @Html.LabelFor(model => model.modeOfPayment, htmlAttributes: new { @class = "col-md-4 col-form-label text-md-right" })
+                            <div class="col-md-8">
+                                @Html.DropDownList("modeOfPayment", new SelectList(new[]
+                                {
+                                    "Select mode of payment",
+                                    "Debit Card",
+                                    "Credit Card",
+                                    "UPI"
+                                }), new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row my-3">
+                            @Html.LabelFor(model => model.totalSeatsBooked, htmlAttributes: new { @class = "col-md-4 col-form-label text-md-right" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.totalSeatsBooked, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.totalSeatsBooked, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <!-- Hidden Fields -->
+                        <div class="form-group row my-3" style="display:none;">
+                            @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "col-md-4 col-form-label text-md-right" })
+                            <div class="col-md-8">
+                                @Html.TextBox("Email", Session["email"], new { id = "email", @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row my-3" style="display:none;">
+                            @Html.LabelFor(model => model.travelDate, htmlAttributes: new { @class = "col-md-4 col-form-label text-md-right" })
+                            <div class="col-md-8">
+                                @Html.TextBox("travelDate", Session["travelDate"], new { id = "travelDate", @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row my-3" style="display:none;">
+                            @Html.LabelFor(model => model.origin, htmlAttributes: new { @class = "col-md-4 col-form-label text-md-right" })
+                            <div class="col-md-8">
+                                @Html.TextBox("Origin", Session["origin"], new { id = "origin", @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row my-3" style="display:none;">
+                            @Html.LabelFor(model => model.destination, htmlAttributes: new { @class = "col-md-4 col-form-label text-md-right" })
+                            <div class="col-md-8">
+                                @Html.TextBox("Destination", Session["destination"], new { id = "destination", @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row my-4">
+                            <div class="col-md-12 text-center">
+                                <input type="submit" value="Book" class="btn btn-info btn-lg btn-block" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+
+    <script>
+        @if (ViewBag.BookingSuccess == true)
+        {
+            <text>
+            Swal.fire({
+                title: 'Booking Successful!',
+                text: 'Your booking has been confirmed.',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '@Url.Action("DisplayMyBookings", "SeatSelection", new {email = Session["email"]})';
+                }
+            });
+            </text>
+        }
+        else if (ViewBag.BookingSuccess == false)
+        {
+            <text>
+            Swal.fire({
+                title: 'Booking Failed!',
+                text: 'Selected number of seats should not be more than the available seats.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            </text>
+        }
+    </script>
+}
+
+

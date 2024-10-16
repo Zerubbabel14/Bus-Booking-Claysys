@@ -1,0 +1,37 @@
+﻿@model BusBooking.Models.User
+@{
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="text-center mb-4">
+    <h1 class="h4 fw-bold text-dark" >
+        <i class="fas fa-bus mr-2" style="font-size: 32px;"></i> Welcome Back, Admin!
+    </h1>
+</div>
+
+<div class="container bg-light rounded shadow p-4" style="max-width: 800px; border: 2px solid #17a2b8;">
+    <div class="d-grid gap-4">
+        <a href="@Url.Action("AddBus", "Bus")" class="btn" style="padding: 1rem; font-size: 1.25rem; background-color: #007bff; color: #FFFFFF; border-radius: 0.5rem; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: background-color 0.3s;">
+            Add Bus
+        </a>
+        <a href="@Url.Action("DisplayAllBookings", "SeatSelection")" class="btn" style="padding: 1rem; font-size: 1.25rem; background-color: #28a745; color: #FFFFFF; border-radius: 0.5rem; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: background-color 0.3s;">
+            Bookings
+        </a>
+        <a href="@Url.Action("BusDetails", "Bus")" class="btn" style="padding: 1rem; font-size: 1.25rem; background-color: #ffc107; color: #FFFFFF; border-radius: 0.5rem; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: background-color 0.3s;">
+            Bus Details
+        </a>
+        <a href="@Url.Action("AddAdmin", "User")" class="btn" style="padding: 1rem; font-size: 1.25rem; background-color: #ff004e; color: #FFFFFF; border-radius: 0.5rem; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: background-color 0.3s;">
+            Add Admin
+        </a>
+        <a href="@Url.Action("CancelRequests", "SeatSelection")" class="btn" style="padding: 1rem; font-size: 1.25rem; background-color: #d31cff; color: #FFFFFF; border-radius: 0.5rem; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: background-color 0.3s;">
+            Cancel Requests
+        </a>
+    </div>
+</div>
+
+
+<style>
+    .btn:hover {
+        transform: scale(1.05); /* Slightly enlarge the button on hover */
+    }
+</style>

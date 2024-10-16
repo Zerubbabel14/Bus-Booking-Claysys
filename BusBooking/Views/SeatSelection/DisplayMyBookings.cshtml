@@ -1,0 +1,85 @@
+﻿@model IEnumerable<BusBooking.Models.SeatSelection>
+
+@{
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4 text-dark">My Bookings</h2>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered shadow-sm bg-white" style="border-radius: 10px; overflow: hidden;">
+            <thead class="thead-dark">
+                <tr class="text-center">
+                    <th>@Html.DisplayNameFor(model => model.bookingId)</th>
+                    <th>@Html.DisplayNameFor(model => model.busName)</th>
+                    <th>@Html.DisplayNameFor(model => model.firstName)</th>
+                    <th>@Html.DisplayNameFor(model => model.email)</th>
+                    <th>@Html.DisplayNameFor(model => model.travelDate)</th>
+                    <th>@Html.DisplayNameFor(model => model.origin)</th>
+                    <th>@Html.DisplayNameFor(model => model.destination)</th>
+                    <th>@Html.DisplayNameFor(model => model.fare)</th>
+                    <th>@Html.DisplayNameFor(model => model.aadharNo)</th>
+                    <th>@Html.DisplayNameFor(model => model.modeOfPayment)</th>
+                    <th>@Html.DisplayNameFor(model => model.totalSeatsBooked)</th>
+                    <th>Ticket Cancellations</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="text-center align-middle">
+                        <td>@Html.DisplayFor(modelItem => item.bookingId)</td>
+                        <td>@Html.DisplayFor(modelItem => item.busName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.firstName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.email)</td>
+                        <td>@Html.DisplayFor(modelItem => item.travelDate)</td>
+                        <td>@Html.DisplayFor(modelItem => item.origin)</td>
+                        <td>@Html.DisplayFor(modelItem => item.destination)</td>
+                        <td>@Html.DisplayFor(modelItem => item.fare)</td>
+                        <td>@Html.DisplayFor(modelItem => item.aadharNo)</td>
+                        <td>@Html.DisplayFor(modelItem => item.modeOfPayment)</td>
+                        <td>@Html.DisplayFor(modelItem => item.totalSeatsBooked)</td>
+                        <td>
+                            @if (item.cancellationStatus == "Pending")
+                            {
+                                <button class="btn btn-info btn-sm">Pending</button>
+                            }
+                            @if (item.cancellationStatus == "Approved")
+                            {
+                                <button class="btn btn-success btn-sm">Approved</button>
+                            }
+                            @if (item.cancellationStatus == "Rejected")
+                            {
+                                <button class="btn btn-danger btn-sm">Rejected</button>
+                            }
+                            @if (item.cancellationStatus == "Booked")
+                            {
+                                <button class="btn btn-danger btn-sm" onclick="confirmCancel('@item.bookingId')">Cancel ticket</button>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function confirmCancel(bookingId) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you want to cancel this ticket?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, cancel it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '@Url.Action("CancelTicket", "SeatSelection")?bookingId=' + bookingId;
+                }
+            });
+        }
+    </script>
+}

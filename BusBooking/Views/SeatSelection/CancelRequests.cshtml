@@ -1,0 +1,54 @@
+﻿@model IEnumerable<BusBooking.Models.CancelRequests>
+
+@{
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container mt-5">
+    <h3 class="text-center text-dark fw-bold mb-4">Cancellation Requests</h3>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover shadow-sm bg-light">
+            <thead class="table-info">
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.bookingId)</th>
+                    <th>@Html.DisplayNameFor(model => model.email)</th>
+                    <th>@Html.DisplayNameFor(model => model.requestDate)</th>
+                    <th>@Html.DisplayNameFor(model => model.cancelStatus)</th>
+                    <th class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.bookingId)</td>
+                        <td>@Html.DisplayFor(modelItem => item.email)</td>
+                        <td>@Html.DisplayFor(modelItem => item.requestDate)</td>
+                        <td>@Html.DisplayFor(modelItem => item.cancelStatus)</td>
+                        <td class="text-center">
+                            <form action="@Url.Action("CancelRequests", "SeatSelection")" method="post" class="d-inline">
+                                <input type="hidden" name="requestId" value="@item.requestId" />
+                                <input type="hidden" name="bookingId" value="@item.bookingId" />
+                                @if (item.cancelStatus == "Pending")
+                                {
+                                    <input type="submit" name="action" value="Approve" class="btn btn-success btn-sm" />
+                                    <input type="submit" name="action" value="Reject" class="btn btn-danger btn-sm" />
+                                }
+                                @if (item.cancelStatus == "Approved")
+                                {
+                                    <input type="button" value="Approve" class="btn btn-success btn-sm" data-toggle="tooltip" title="Already approved" />
+                                    <input type="button" value="Reject" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Already approved" />
+                                }
+                                @if (item.cancelStatus == "Rejected")
+                                {
+                                    <input type="button" value="Approve" class="btn btn-success btn-sm" data-toggle="tooltip" title="Already rejected" />
+                                    <input type="button" value="Reject" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Already rejected" />
+                                }
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

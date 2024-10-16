@@ -1,0 +1,152 @@
+﻿@model BusBooking.Models.Bus
+
+@{
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+        <div class="text-center mb-4">
+            <h4 class="h4 fw-bold text-dark">Add New Bus</h4>
+        </div>
+        <div class="bg-light rounded shadow p-4 mx-auto" style="max-width: 600px; border: 2px solid #17a2b8;">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="mb-3 row">
+                @Html.LabelFor(model => model.BusNo, htmlAttributes: new { @class = "col-sm-3 col-form-label text-secondary" })
+                <div class="col-sm-9">
+                    @Html.EditorFor(model => model.BusNo, new { htmlAttributes = new { @class = "form-control border-info" } })
+                    @Html.ValidationMessageFor(model => model.BusNo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                @Html.LabelFor(model => model.BusType, htmlAttributes: new { @class = "col-sm-3 col-form-label text-secondary" })
+                <div class="col-sm-9">
+                    <select name="BusType" id="BusType" class="form-control border-info">
+                        <option>AC</option>
+                        <option>Normal</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                @Html.LabelFor(model => model.SeatRow, htmlAttributes: new { @class = "col-sm-3 col-form-label text-secondary" })
+                <div class="col-sm-9">
+                    <select name="SeatRow" id="SeatRow" class="form-control border-info">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                @Html.LabelFor(model => model.SeatColumn, htmlAttributes: new { @class = "col-sm-3 col-form-label text-secondary" })
+                <div class="col-sm-9">
+                    <select name="SeatColumn" id="SeatColumn" class="form-control border-info">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                @Html.LabelFor(model => model.Origin, htmlAttributes: new { @class = "col-sm-3 col-form-label text-secondary" })
+                <div class="col-sm-9">
+                    <select name="Origin" id="Origin" class="form-control border-info">
+                        <option>Select Origin</option>
+                        <option>Chennai</option>
+                        <option>Tiruppur</option>
+                        <option>Coimbatore</option>
+                        <option>Vellore</option>
+                        <option>Bangalore</option>
+                        <option>Kochi</option>
+                        <option>Trichy</option>
+                        <option>Ooty</option>
+                        <option>Madurai</option>
+                        <option>Tirunelveli</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                @Html.LabelFor(model => model.Destination, htmlAttributes: new { @class = "col-sm-3 col-form-label text-secondary" })
+                <div class="col-sm-9">
+                    <select name="Destination" id="Destination" class="form-control border-info" disabled>
+                        <option>Select Destination</option>
+                        <option>Chennai</option>
+                        <option>Tiruppur</option>
+                        <option>Coimbatore</option>
+                        <option>Vellore</option>
+                        <option>Bangalore</option>
+                        <option>Kochi</option>
+                        <option>Trichy</option>
+                        <option>Ooty</option>
+                        <option>Madurai</option>
+                        <option>Tirunelveli</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                @Html.LabelFor(model => model.BusName, htmlAttributes: new { @class = "col-sm-3 col-form-label text-secondary" })
+                <div class="col-sm-9">
+                    @Html.EditorFor(model => model.BusName, new { htmlAttributes = new { @class = "form-control border-info" } })
+                    @Html.ValidationMessageFor(model => model.BusName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="text-center">
+                <input type="submit" value="Add Bus" class="btn btn-info btn-lg" style="background-color: #17a2b8; color: #FFFFFF; border-radius: 0.5rem; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: background-color 0.3s;" />
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Function to populate the Destination dropdown based on the selected Origin
+            $("#Destination option").hide();
+            $("#Origin").change(function () {
+                const origin = $(this).val();
+                $("#Destination option").show(); // Reset the To options
+                if (origin) {
+                    $("#Destination").prop('disabled', false);
+                    $("#Destination option").filter(function () {
+                        return $(this).text() === origin;
+                    }).hide(); // Hide the option in 'To' that matches 'From'
+                } else {
+                    $("#Destination").prop('disabled', true);
+                }
+            });
+            $("#Destination").change(function () {
+                const destination = $(this).val();
+                $("#Origin option").show();
+                if (destination) {
+                    $("#Origin option").filter(function () {
+                        return $(this).text() === destination;
+                    }).hide();
+                } else {
+                    $("#Origin").prop('disabled', true);
+                }
+            });
+        });
+    </script>
+}

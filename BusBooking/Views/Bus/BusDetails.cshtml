@@ -1,0 +1,49 @@
+﻿@model IEnumerable<BusBooking.Models.Bus>
+
+@{
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<div class="text-center mb-4">
+    <h4 class="h4 fw-bold text-dark">Bus details</h4>
+</div>
+<div class="table-responsive">
+    <table class="table table-bordered table-hover table-striped bg-white">
+        <!-- White background for table -->
+        <thead class="thead-dark">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.BusId)</th>
+                <th>@Html.DisplayNameFor(model => model.BusNo)</th>
+                <th>@Html.DisplayNameFor(model => model.BusType)</th>
+                <th>@Html.DisplayNameFor(model => model.SeatRow)</th>
+                <th>@Html.DisplayNameFor(model => model.SeatColumn)</th>
+                <th>@Html.DisplayNameFor(model => model.Origin)</th>
+                <th>@Html.DisplayNameFor(model => model.Destination)</th>
+                <th>@Html.DisplayNameFor(model => model.BusName)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.BusId)</td>
+                    <td>@Html.DisplayFor(modelItem => item.BusNo)</td>
+                    <td>@Html.DisplayFor(modelItem => item.BusType)</td>
+                    <td>@Html.DisplayFor(modelItem => item.SeatRow)</td>
+                    <td>@Html.DisplayFor(modelItem => item.SeatColumn)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Origin)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Destination)</td>
+                    <td>@Html.DisplayFor(modelItem => item.BusName)</td>
+                    <td class="text-center">
+                        <div class="btn-group" role="group">
+                            @Html.ActionLink("Schedule Details", "ScheduleDetails", "Schedule", new { busId = item.BusId }, new { @class = "btn btn-sm btn-info" }) <!-- Info color -->
+                        </div>
+                        <div class="btn-group" role="group">
+                            @Html.ActionLink("Add Schedule", "AddSchedule", "Schedule", new { busId = item.BusId, busName = item.BusName, origin = item.Origin, destination = item.Destination }, new { @class = "btn btn-sm btn-primary" }) <!-- Primary color -->
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

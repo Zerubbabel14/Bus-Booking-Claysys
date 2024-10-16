@@ -1,0 +1,151 @@
+﻿@model BusBooking.Models.User
+
+<div class="text-center mb-4">
+    <h1 class="h4 fw-bold">
+        <i class="fas fa-bus text-dark mr-2" style="font-size: 32px;"></i>
+        Book Your Bus Ticket
+    </h1>
+
+    <div class="container bg-light rounded shadow p-5 my-4" style="max-width: 900px; border: 2px solid #17a2b8;">
+        <div class="card border-0">
+            <form class="row g-3" method="post">
+                <div class="col-md-4">
+                    <label for="From" class="form-label text-secondary">From</label>
+                    <select class="form-control border-info" id="From" name="fromPlace" autocomplete="off" required>
+                        <option class="text-secondary">Depart From</option>
+                        <option>Chennai</option>
+                        <option>Tiruppur</option>
+                        <option>Coimbatore</option>
+                        <option>Vellore</option>
+                        <option>Bangalore</option>
+                        <option>Kochi</option>
+                        <option>Trichy</option>
+                        <option>Ooty</option>
+                        <option>Madurai</option>
+                        <option>Tirunelveli</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="To" class="form-label text-secondary">To</label>
+                    <select class="form-control border-info" id="To" name="toPlace" autocomplete="off" required>
+                        <option class="text-secondary">Going To</option>
+                        <option>Chennai</option>
+                        <option>Tiruppur</option>
+                        <option>Coimbatore</option>
+                        <option>Vellore</option>
+                        <option>Bangalore</option>
+                        <option>Kochi</option>
+                        <option>Trichy</option>
+                        <option>Ooty</option>
+                        <option>Madurai</option>
+                        <option>Tirunelveli</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="Date" class="form-label text-secondary">Date</label>
+                    <input type="date" class="form-control border-info" id="departDate" name="travelDate" required>
+                </div>
+                <div class="col-md-1 d-flex align-items-end">
+                    <button type="submit" class="btn btn-info btn-lg w-100 shadow-sm">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <p class="lead text-white">
+        Welcome to Wee Travels. We are dedicated to providing you with a seamless and comfortable travel experience. Our reliable bus booking service ensures that your journey is hassle-free and enjoyable. With our user-friendly platform, you can easily book your tickets and select your preferred seats from the comfort of your home.
+        <br><br>
+        At Wee Travels, we prioritize your convenience by offering a wide selection of routes and flexible scheduling options to meet your travel needs. Our modern, well-maintained buses are designed to provide maximum comfort, making your trip as pleasant as possible. We take pride in our punctuality and reliability, ensuring that you reach your destination on time.
+        <br><br>
+        Our dedicated customer support team is available 24/7 to assist you with any inquiries or concerns you may have. Whether you need help with booking, modifications, or simply have questions about our services, we are here to support you every step of the way. Experience travel at its best with Wee Travels, where your journey is our top priority.
+    </p>
+
+
+</div>
+
+<div class="container bg-light rounded shadow p-5" style="max-width: 900px; border: 2px solid #17a2b8;">
+    <div class="card border-0 mb-4">
+        <div class="card-body">
+            <h2 class="h5 text-info mb-3">Why Travel with Us?</h2>
+            <ul class="list-unstyled">
+                <li class="mb-2"><i class="fas fa-check-circle text-success"></i> Convenient online booking platform</li>
+                <li class="mb-2"><i class="fas fa-check-circle text-success"></i> Secure and multiple payment options</li>
+                <li class="mb-2"><i class="fas fa-check-circle text-success"></i> Friendly 24/7 customer support</li>
+                <li class="mb-2"><i class="fas fa-check-circle text-success"></i> Wide selection of bus operators and routes</li>
+                <li class="mb-2"><i class="fas fa-check-circle text-success"></i> Real-time updates and notifications</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card border-0 mb-4">
+        <div class="card-body">
+            <h2 class="h5 text-info mb-3">Explore Our Services</h2>
+            <p class="text-dark">We offer a comprehensive range of services to ensure a smooth and comfortable travel experience:</p>
+            <ul class="list-unstyled">
+                <li class="mb-2"><i class="fas fa-map-marker-alt text-danger"></i> Extensive network of routes covering major cities and towns</li>
+                <li class="mb-2"><i class="fas fa-calendar-alt text-warning"></i> Flexible scheduling options to suit your travel needs</li>
+                <li class="mb-2"><i class="fas fa-bus text-primary"></i> Modern and well-maintained buses for a comfortable journey</li>
+                <li class="mb-2"><i class="fas fa-clock text-info"></i> Punctual and reliable service to get you to your destination on time</li>
+                <li class="mb-2"><i class="fas fa-shield-alt text-success"></i> Enhanced safety measures to ensure your well-being during the trip</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card border-0">
+        <div class="card-body">
+            <h2 class="h5 text-info mb-3">Get in Touch</h2>
+            <p class="text-dark">Have any questions or need assistance? Our customer support team is here to help you 24/7. Feel free to reach out to us via:</p>
+            <ul class="list-unstyled">
+                <li class="mb-2"><i class="fas fa-phone-alt text-success"></i> Phone: +91 9988772530</li>
+                <li class="mb-2"><i class="fas fa-envelope text-warning"></i> Email: weetravels@gmail.com</li>
+                <li class="mb-2">
+                    <i class="fas fa-map-marker-alt text-danger"></i> Address: Wee Travels Headquarters, Coimbatore, Tamil Nadu - 641001
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Set min date
+            function setMinDate() {
+                const today = new Date();
+                const year = today.getFullYear();
+                const month = String(today.getMonth() + 1).padStart(2, '0');
+                const day = String(today.getDate()).padStart(2, '0');
+                const minDate = `${year}-${month}-${day}`;
+                $("#departDate").attr("min", minDate);
+            }
+            setMinDate();
+            $("#To option").hide();
+            $("#From").change(function () {
+                const fromPlace = $(this).val();
+                $("#To option").show(); // Reset the To options
+                if (fromPlace) {
+                    $("#To").prop('disabled', false);
+                    $("#To option").filter(function () {
+                        return $(this).text() === fromPlace;
+                    }).hide(); // Hide the option in 'To' that matches 'From'
+                } else {
+                    $("#To").prop('disabled', true);
+                }
+            });
+            $("#To").change(function () {
+                const toPlace = $(this).val();
+                $("#From option").show();
+                if (toPlace) {
+                    $("#From option").filter(function () {
+                        return $(this).text() === toPlace;
+                    }).hide(); 
+                } else {
+                    $("#From").prop('disabled', true); 
+                }
+            });
+        });
+    </script>
+}
